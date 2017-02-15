@@ -31,8 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'rango',
-    'bingo',
+    'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,18 +77,22 @@ WSGI_APPLICATION = 't_w_d_p.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 'ENGINE': 'mysql.connector.django',
-        'NAME': 'rango',
-        'USER': 'root',
-        'PASSWORD': '110889',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-        'OPTIONS': {'autocommit': True, },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
     # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     # 'ENGINE': 'mysql.connector.django',
+    #     'NAME': 'app',
+    #     'USER': 'root',
+    #     'PASSWORD': '110889',
+    #     'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    #     'OPTIONS': {'autocommit': True, },
+    # }
+    # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'rango',
+    #     'NAME': 'app',
     #     'USER': 'postgres',
     #     'PASSWORD': '110889',
     #     'HOST': '127.0.0.1',
