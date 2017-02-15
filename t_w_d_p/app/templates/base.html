@@ -100,9 +100,11 @@ Navigation Bar Section
 		  </a>
 		  <div class="nav-collapse">
 			<ul class="nav">
-			  <li class=""><a href="/app/index">Home	</a></li>
-			  <li class=""><a id="clearSearchInfo" class="list_view" data-prod="/1">List View</a></li>
+			  <li class=""><a href="/app/index">Home</a></li>
+
+			  <li class=""><a id="clearSearchInfo" class="list_view" data-prod="/1" href="#">List View</a></li>
 			  <li class=""><a id="grid_view" href="#">Grid View</a></li>
+
 			  <li class=""><a href="#">Three Column</a></li>
 				{% if user.is_authenticated %}
 				<li class=""><a  href="/app/add_product">Add Product</a></li>

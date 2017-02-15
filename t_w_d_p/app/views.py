@@ -107,7 +107,7 @@ def list_view(request, category_id='', page=None, search_info=''):
             context_dict['paginator'] = False
         context_dict['object_list'] = products_all
         context_dict['category_id'] = category_id
-        return render(request, 'app/list_view.html', context_dict, context)
+        return render(request, 'list_view.html', context_dict, context)
 
 
 def grid_view(request):
