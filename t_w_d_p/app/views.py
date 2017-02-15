@@ -190,7 +190,7 @@ def add_category(request):
         else:
             print(form.errors)
     else:
-        form = ProductForm()
+        form = CategoryForm()
     return render(request, 'add_category.html', {'form': form, 'createdCategory': createdCategory, 'categories': categories}, context)
 
 

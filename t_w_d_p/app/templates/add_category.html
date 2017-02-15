@@ -7,7 +7,7 @@
 				{% if createdCategory %}
 				<strong>New category has been created successfully !</strong>
 				{% else %}
-				<form id="add_category_form" method="post" action="/add_category/" enctype="multipart/form-data">
+				<form id="add_category_form" method="post" action="/app/add_category/" enctype="multipart/form-data">
 					{% csrf_token %}
 					{% for hidden in form.hidden_fields %}
 					{{ hidden }}
