@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    userLogo = models.ImageField(upload_to='user_images', blank=True)
+    userLogo = models.FileField(upload_to='user_images', blank=True)
 
     def __str__(self):
         return self.userLogo
@@ -15,6 +15,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Product(models.Model):
     category = models.ForeignKey(Category, blank=False, on_delete=models.PROTECT)

@@ -11,9 +11,9 @@
 				{% for product in product_group %}
 				<li class="span4">
 				  <div class="thumbnail">
-					<a href="/rango/product_details/{{ product.id }}" class="overlay"></a>
+					<a href="/app/product_details/{{ product.id }}" class="overlay"></a>
 					<a class="zoomTool" href="/rango/product_details/{{ product.id }}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-					<a href="/rango/product_details/{{ product.id }}"><img src={{ product.productLogo.url }} alt=""></a>
+					<a href="/app/product_details/{{ product.id }}"><img src={{ product.productLogo.url }} alt=""></a>
 					<div class="caption cntr">
 						<p>{{ product.brand }}</p>
 						<p><strong> ${{ product.price }}</strong></p>

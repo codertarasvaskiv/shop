@@ -74,7 +74,7 @@ def my_account(request):
     context = RequestContext(request)
     categories = Category.objects.all()
     context_dict = {'categories': categories}
-    return render(request, 'app/my_account.html', context_dict, context)
+    return render(request, 'my_account.html', context_dict, context)
 
 
 # works good but i need paginator so I use FBView (later i will improve with CBW)
