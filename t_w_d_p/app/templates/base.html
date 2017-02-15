@@ -106,10 +106,11 @@ Navigation Bar Section
 			  <li class=""><a href="#">Three Column</a></li>
 				{% if user.is_authenticated %}
 				<li class=""><a  href="/app/add_product">Add Product</a></li>
+				<li class=""><a href="/app/add_category">Add Category</a></li>
 				{% else %}
 			    <li class=""><a href="#">Four Column</a></li>
 				{% endif %}
-			  <li class="active"><a href="/general">General Content</a></li>
+
 			</ul>
 			<form action="/search/" method="get" class="navbar-search pull-left">
 				{% csrf_token %}

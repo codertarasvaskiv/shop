@@ -3,18 +3,18 @@
 <div class="span9">
 		<!--<div class="well well-small">-->
 			<div id="indent">
-				<h1>Add a Product</h1>
-				{% if createdProduct %}
-				<strong>New product has been created successfully !</strong>
+				<h1>Add a Category</h1>
+				{% if createdCategory %}
+				<strong>New category has been created successfully !</strong>
 				{% else %}
-				<form id="add_product_form" method="post" action="/add_product/" enctype="multipart/form-data">
+				<form id="add_category_form" method="post" action="/add_category/" enctype="multipart/form-data">
 					{% csrf_token %}
 					{% for hidden in form.hidden_fields %}
 					{{ hidden }}
 					{% endfor %}
 					<br>
 					{{ form.as_p }}
-					<input  type="submit" name="submit" value="Create Product" />
+					<input  type="submit" name="submit" value="Create Category" />
 				</form>
 
 				{% endif %}

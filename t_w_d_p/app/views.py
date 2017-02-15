@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import ProductForm, UserForm, UserProfileForm
+from .forms import ProductForm, CategoryForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -170,6 +170,28 @@ def add_product(request):
     else:
         form = ProductForm()
     return render(request, 'add_product.html', {'form': form, 'createdProduct': createdProduct, 'categories': categories}, context)
+
+
+@login_required
+def add_category(request):
+    context = RequestContext(request)
+    createdCategory= False
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            if 'category_logo' in request.FILES:
+                form.product_logo = request.FILES['category_logo']
+            else:
+                print('not in')
+            form.save()
+            createdCategory = True
+            return render(request, 'add_category.html', {'createdCategory': createdCategory, 'categories': categories}, context)
+        else:
+            print(form.errors)
+    else:
+        form = ProductForm()
+    return render(request, 'add_category.html', {'form': form, 'createdCategory': createdCategory, 'categories': categories}, context)
 
 
 def register(request):

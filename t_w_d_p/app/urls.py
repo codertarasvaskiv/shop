@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^user_logout/', views.user_logout, name='user_logout'),
     url(r'^about/', views.about, name='about'),
     url(r'^add_product/', views.add_product, name='add_product'),
+    url(r'^add_category/', views.add_category, name='add_category'),
     url(r'^delete_product/', views.delete_product, name='delete_product'),
     url(r'^edit_product/(?P<pk>[0-9]+)$', views.ProductUpdateView.as_view(), name='edit_product'),
     url(r'^general/', views.general, name='general'),
