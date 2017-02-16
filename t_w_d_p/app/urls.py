@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from .views import ProductGridView, ProductDetailView
 
 urlpatterns = [
     url(r'^like/$', views.like, name='like'),
@@ -16,6 +17,6 @@ urlpatterns = [
     url(r'^general/', views.general, name='general'),
     # url(r'^list_view/', views.ProductListViev.as_view(), name='list_view'), works fine but i need Paginator
     url(r'^list_view/(?P<category_id>[0-9]*)/(?P<page>[0-9]*)/(?P<search_info>.*)$', views.list_view, name='list_view'),
-    url(r'^grid_view/', views.grid_view, name='grid_view'),
-    url(r'^product_details/(?P<product_id>[0-9]+)$', views.product_details, name='product_details'),
+    url(r'^grid_view/', ProductGridView.as_view(), name='grid_view'),
+    url(r'^product_details/(?P<pk>[0-9]+)$', ProductDetailView.as_view(), name='product_details'),
 ]

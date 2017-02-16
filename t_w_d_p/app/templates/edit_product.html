@@ -1,10 +1,9 @@
-
 {% if edited_product %}
 <p>Product has been edited succesfully.</p>
 {% else %}
 <div class="span9">
     <div class="well well-small">
-        <form method="post" action="/rango/edit_product/{{product.id}}" enctype="multipart/form-data">{% csrf_token %}
+        <form method="post" action="/app/edit_product/{{product.id}}" enctype="multipart/form-data">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Update product" />
         </form>
