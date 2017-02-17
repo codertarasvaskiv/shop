@@ -25,7 +25,7 @@ class Product(models.Model):
     style = models.CharField(max_length=20)
     season = models.CharField(max_length=20)
     like = models.IntegerField()
-    brand = models.CharField(max_length=20)
+    description = models.CharField(max_length=300)
     productLogo = models.FileField(upload_to='product_images', blank=True)
 
     def __str__(self):

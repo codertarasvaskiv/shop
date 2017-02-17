@@ -26,7 +26,12 @@
             </div>
 			</div>
 			<div class="span7">
-				<h3>{{ product.name }} [${{ product.price }}]</h3>
+				<h3>{{ product.name }}</h3>
+				{% if user.is_authenticated %}
+				<input type="button" id="delete" value="Delete " data-prod="{{ product.id }}"/>
+
+				<a id="loadUpdateViewJquery" data-prod="{{ product.id }}"><input type="button" value="Edit "/></a>
+				{% endif %}
 				<hr class="soft"/>
 				
 				<form class="form-horizontal qtyFrm">
@@ -36,46 +41,15 @@
 					<input type="number" class="span6" placeholder="Qty.">
 					</div>
 				  </div>
-				
-				  <div class="control-group">
-					<label class="control-label"><span>Color</span></label>
-					<div class="controls">
-					  <select class="span11">
-						  <option>Red</option>
-						  <option>Purple</option>
-						  <option>Pink</option>
-						  <option>Red</option>
-						</select>
-					</div>
-				  </div>
-				  <div class="control-group">
-					<label class="control-label"><span>Materials</span></label>
-					<div class="controls">
-					  <select class="span11">
-						  <option>Material 1</option>
-						  <option>Material 2</option>
-						  <option>Material 3</option>
-						  <option>Material 4</option>
-						</select>
-					</div>
-				  </div>
-				  <h4>100 items in stock</h4>
-				  <p>Nowadays the lingerie industry is one of the most successful business spheres.
-				  Nowadays the lingerie industry is one of ...
-				  <p>
 				  <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Add to cart</button>
 				</form>
 
-				<input type="button" id="like" value="like" data-prod="{{ product.id }}"/>
-				{% if user.is_authenticated %}
-				<input type="button" id="delete" value="Delete " data-prod="{{ product.id }}"/>
-				<!--<input type="button" id="edit" value="Edit " data-prod="{{ product.id }}"/>-->
-				<!--<a href="{% url 'edit_product' pk=product.id %}"><input type="button" id="t" value="Edit "-->
-																		<!--data-prod="{{ product.id }}"/></a>-->
-				<a id="loadUpdateViewJquery" data-prod="{{ product.id }}"><input type="button" value="Edit "/></a>
-				{% endif %}
+				<div >Number of likes is <p id="like_count">{{ product.like }}</p>
+					<input type="button" id="like" value="Like it press here" data-prod="{{ product.id }}"/>
+				</div>
 
-				<div id="like_count">{{ product.like }}</div>
+
+
 			</div>
 			</div>
 				<hr class="softn clr"/>
@@ -96,14 +70,9 @@
 					<tr class="techSpecRow"><td class="techSpecTD1">Season:</td><td class="techSpecTD2">{{ product.season }}</td></tr>
 					<tr class="techSpecRow"><td class="techSpecTD1">Category:</td><td class="techSpecTD2">{{ product.category }}</td></tr>
 					<tr class="techSpecRow"><td class="techSpecTD1">Like:</td><td class="techSpecTD2">{{ product.like }}</td></tr>
-					<tr class="techSpecRow"><td class="techSpecTD1">Brand:</td><td class="techSpecTD2">{{ product.brand}}</td></tr>
 					</tbody>
 					</table>
-					<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
-						retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-						Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-						terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
-						american apparel, butcher voluptate nisi qui.</p>
+					<p>{{ product.description }}</p>
 				</div>
 
 				<div class="tab-pane fade" id="profile">
@@ -115,10 +84,7 @@
 							<div class="span6">
 								<h5>{{ product.name | upper }} </h5>
 								<p>
-								The brand of this good is {{ product.brand}}. Nowadays the lingerie industry is one of the most successful business spheres.
-								We always stay in touch with the latest fashion tendencies -
-								that is why our goods are so popular..
-									{{ product.color }} {{ product.style }}
+									{{ product.description}}
 								</p>
 							</div>
 							<div class="span4 alignR">

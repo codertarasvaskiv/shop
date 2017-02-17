@@ -48,7 +48,7 @@
 				{% else %}
 				<a href="/app/register"><span class="icon-edit"></span> Free Register </a>
 				{% endif %}
-				<a href="#"><span class="icon-envelope"></span> Contact us</a>
+				<a href="/app/test"><span class="icon-envelope"></span> Contact us</a>
 				<a href="#"><span class="icon-shopping-cart"></span> 1 Item(s) - <span class="badge badge-warning"> $448.42</span></a>
 			</div>
 		</div>
@@ -60,32 +60,7 @@ Lower Header Section
 -->
 <div class="container">
 <div id="gototop"> </div>
-<header id="header">
-<div class="row">
-	<div class="span4">
-	<h1>
-	<a class="logo" href="index.html"><span>Twitter Bootstrap ecommerce template</span>
-		<img src="{% static '/assets/img/logo-bootstrap-shoping-cart.png' %}" alt="bootstrap sexy shop">
-	</a>
-	</h1>
-	</div>
-	<div class="span4">
-	<div class="offerNoteWrapper">
-	<h1 class="dotmark">
-	<i class="icon-cut"></i>
-	Twitter Bootstrap shopping cart HTML template is available @ $14
-	</h1>
-	</div>
-	</div>
-	<div class="span4 alignR">
-	<p><br> <strong> Support (24/7) :  0800 1234 678 </strong><br><br></p>
-	<span class="btn btn-mini">[ 2 ] <span class="icon-shopping-cart"></span></span>
-	<span class="btn btn-warning btn-mini">$</span>
-	<span class="btn btn-mini">&pound;</span>
-	<span class="btn btn-mini">&euro;</span>
-	</div>
-</div>
-</header>
+<header id="header"></header>
 
 <!--
 Navigation Bar Section
@@ -102,7 +77,7 @@ Navigation Bar Section
 			<ul class="nav">
 			  <li class=""><a href="/app/index">Home</a></li>
 
-			  <li class=""><a id="clearSearchInfo" class="list_view" data-prod="/1" href="#">List View</a></li>
+			  <li class=""><a href="/app/list_view" id="clearSearchInfo" data-prod="/1" >List View</a></li>
 			  <li class=""><a id="grid_view" href="#">Grid View</a></li>
 
 			  <li class=""><a href="#">Three Column</a></li>
@@ -165,7 +140,7 @@ Body Section
 				<ul class="nav nav-list">
 					{% if categories %}
 					{% for category in categories %}
-						<li><a class="category" href="#" data-prod={{category.id}}><span class="icon-chevron-right"></span>{{category.name}}</a></li>
+						<li><a class="category" href="/app/list_view/{{ category.name }}" ><span class="icon-chevron-right"></span>{{category.name}}</a></li>
 						{% endfor %}
 
 					{% else %}
@@ -176,49 +151,11 @@ Body Section
 				</ul>
 			</div>
 			<div class="well well-small alert alert-warning cntr">
-				  <h2>50% Discount</h2>
+				<br>
+				  <h2>free space</h2>
 				  <p>
-					 only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
 				  </p>
 			</div>
-			  <div class="well well-small" ><a href="#">
-				  <img src="{% static "assets/img/paypal.jpg" %}" alt="payment method paypal"></a>
-			  </div>
-
-				<a class="shopBtn btn-block" href="#">Upcoming products <br><small>Click to view</small></a>
-				<br>
-				<br>
-				<ul class="nav nav-list promowrapper">
-				<li>
-				  <div class="thumbnail">
-					<a class="zoomTool" href="{% static "product_details.html" %}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-					<img src="{% static "assets/img/bootstrap-ecommerce-templates.PNG" %}" alt="bootstrap ecommerce templates">
-					<div class="caption">
-					  <h4><a class="defaultBtn" href="{% static "product_details.html">VIEW</a> <span class="pull-right">$22.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li style="border:0"> &nbsp;</li>
-				<li>
-				  <div class="thumbnail">
-					<a class="zoomTool" href="{% static 'product_details.html' %}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-					<img src="{% static 'assets/img/shopping-cart-template.PNG' %}" alt="shopping cart template">
-					<div class="caption">
-					  <h4><a class="defaultBtn" href="{% static 'product_details.html' %}">VIEW</a> <span class="pull-right">$22.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li style="border:0"> &nbsp;</li>
-				<li>
-				  <div class="thumbnail">
-					<a class="zoomTool" href="{% static 'product_details.html' %}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-					<img src="{% static "assets/img/bootstrap-template.png" %}" alt="bootstrap template">
-					<div class="caption">
-					  <h4><a class="defaultBtn" href="{% static 'product_details.html' %}">VIEW</a> <span class="pull-right">$22.00</span></h4>
-					</div>catid
-				  </div>
-				</li>
-			  </ul>
 
 		</div>
 

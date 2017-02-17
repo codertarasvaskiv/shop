@@ -2,15 +2,24 @@ from django.shortcuts import render
 from .forms import ProductForm, CategoryForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+import logging
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import DetailView
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from .models import Product, Category, UserProfile
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import urllib.request
+import lxml.html as lh
+import requests
+from bs4 import BeautifulSoup
+
+
+
+logger_ = logging.getLogger('root')
 
 @login_required
 def like(request):
@@ -38,13 +47,50 @@ class ProductUpdateView(UpdateView):  # update product based on ClassBasedViews
     success_url = '../index'
 
 
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['related_products'] = Product.objects.filter(category=context['product'].category)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('index')
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'list_view.html'
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+    def get_queryset(self):
+        queryset = super(ProductListView, self).get_queryset()
+
+        if 'category' in self.kwargs:
+            cat = Category.objects.filter(name=self.kwargs['category'])
+            queryset = queryset.filter(category=cat)
+
+
+        return queryset
+
+
 
 
 def general(request):
     context = RequestContext(request)
     categories = Category.objects.all()
     context_dict = {'boldmessage': 'I am a bald message', 'categories': categories}
-    return render(request, 'app/general.html', context_dict, context)
+    return render(request, 'general.html', context_dict, context)
 
 
 def my_account(request):
@@ -52,34 +98,6 @@ def my_account(request):
     categories = Category.objects.all()
     context_dict = {'categories': categories}
     return render(request, 'my_account.html', context_dict, context)
-
-
-
-def list_view(request, category_id='', page=None, search_info=''):
-        context = RequestContext(request)
-        context_dict = dict()
-        if category_id: # if we specify category
-            products_all = Product.objects.filter(category=category_id)
-        elif search_info:
-            products_all = Product.objects.filter(name__icontains=search_info).order_by('price', 'name').reverse()
-        else:
-            products_all = Product.objects.all().order_by('price', 'name').reverse()
-        if len(products_all) > 5:  # if len is < 5 not to display paginator
-            paginator = Paginator(products_all, 5)
-            context_dict['paginator'] = True
-            try:
-                products_all = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                products_all = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                products_all = paginator.page(paginator.num_pages)
-        else:
-            context_dict['paginator'] = False
-        context_dict['object_list'] = products_all
-        context_dict['category_id'] = category_id
-        return render(request, 'list_view.html', context_dict, context)
 
 
 class ProductGridView(View):
@@ -102,17 +120,9 @@ class ProductGridView(View):
         return render(request, 'grid_view.html', context_dict)
 
 
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'product_details.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(**kwargs)
-        context['related_products'] = Product.objects.filter(category=context['product'].category)
-        context['categories'] = Category.objects.all()
-        return context
 
 def index(request):
+    logger_.debug('dedug')
     context = RequestContext(request)
     categories = Category.objects.all()
     context_dict = {'boldmessage': 'I am a bald message', 'categories': categories}
@@ -220,4 +230,3 @@ def user_logout(request):
     context = RequestContext(request)
     logout(request)
     return render(request, 'index.html', {}, context)
-

@@ -81,11 +81,20 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
     # 'default': {
+    #      #'ENGINE': 'django.db.backends.mysql',
+    #     'ENGINE': 'mysql.connector.django',
+    #     'NAME': 'codertarasvaskiv@crm',
+    #     'USER': 'codertarasvaskiv',
+    #     'PASSWORD': 'codertarasvaskiv110889',
+    #     'HOST': 'codertarasvaskiv.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+    #     'OPTIONS': {'autocommit': True, },
+    # }
+    # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     # 'ENGINE': 'mysql.connector.django',
-    #     'NAME': 'app',
+    #     'NAME': 'codertarasvaskiv@crm',
     #     'USER': 'root',
-    #     'PASSWORD': '110889',
+    #     'PASSWORD': 'codertarasvaskiv110889',
     #     'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
     #     'PORT': '3306',
     #     'OPTIONS': {'autocommit': True, },
@@ -143,4 +152,48 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 MEDIA_URL = '/media/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+            },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+            },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '../logs/log.log',
+            },
+        'file_rotated': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': '../logs/daylog.log',
+            'when': 'midnight',
+            'backupCount': 5,
+            },
+        # 'mail_admins': {
+        #     'level': 'ERROR',
+        #     'class': 'django.utils.log.AdminEmailHandler',
+        #     'formatter': 'verbose',
+        #     },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+            },
+    },
+    }
 

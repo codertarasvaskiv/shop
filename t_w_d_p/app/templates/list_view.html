@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block body %}
+
 	<div class="span9">
 		<div class="well well-small">
 			{% if object_list %}
@@ -9,9 +12,7 @@
 				<div class="span6">
 					<h5>{{ product.name | upper }} </h5>
 					<p>
-					The brand of this good is {{ product.brand}}. Nowadays the lingerie industry is one of the most successful business spheres.
-					We always stay in touch with the latest fashion tendencies -
-					that is why our goods are so popular..
+					{{ product.description }}
                         {{ product.color }} {{ product.style }}
 					</p>
 				</div>
@@ -29,19 +30,18 @@
 				</div>
 			</div>
 			<hr class="soften">
-
             {% endfor %}
 
-					{% if paginator %} <!--checks if there is more then 5 elements on the page-->
+					{% if is_paginated %}
 					<span class="step-links">
-						{% if object_list.has_previous %}
-							<a class="list_view" data-prod="{{category_id}}/{{ object_list.previous_page_number }}"}> Previous </a>
+						{% if page_obj.has_previous %}
+							<a href="?page={{ page_obj.previous_page_number }}"> Previous </a>
 						{% endif %}
 						<span class="current">
-							Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+							Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 						</span>
-						{% if object_list.has_next %}
-							<a class="list_view" data-prod="{{category_id}}/{{ object_list.next_page_number }}"> Next </a>
+						{% if page_obj.has_next %}
+							<a href="?page={{ page_obj.next_page_number }}"> Next </a>
 						{% endif %}
 					</span>
 					{% endif %}
@@ -49,6 +49,6 @@
 			{% else %}
 			<h3>No goods here yet. Sorry for now!</h3>
 			{% endif %}
-
 		</div>
 	</div>
+{% endblock %}

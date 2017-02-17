@@ -3,7 +3,7 @@ from .models import Product, Category, UserProfile
 
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'color', 'style', 'brand')
+    list_display = ('name', 'price', 'color', 'style', )
 
 
 admin.site.register(Product, PageAdmin)
