@@ -80,6 +80,12 @@ class ProductListView(ListView):
             cat = Category.objects.filter(name=self.kwargs['category'])
             queryset = queryset.filter(category=cat)
 
+        if 'order_by' not in self.kwargs:
+            queryset = queryset.order_by('price')
+        else:
+            queryset = queryset.order_by(self.kwargs['order_by'])
+
+
 
         return queryset
 

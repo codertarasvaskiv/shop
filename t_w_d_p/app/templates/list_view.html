@@ -2,6 +2,19 @@
 {% block body %}
 
 	<div class="span9">
+
+		<form id="serch_form" method="port" action="/app/list_view">
+			{% csrf_token %}
+			<p> <label for="category">Sort By</label>
+			<select id="category">
+				<option value selected="selected">-----</option>
+
+				{% for cat in categories %}
+				<option >{{ cat  }}</option>
+				{% endfor %}
+			</select> <input  type="submit" name="submit" value="Search"></p>
+		</form>
+
 		<div class="well well-small">
 			{% if object_list %}
 			{% for product in object_list %}

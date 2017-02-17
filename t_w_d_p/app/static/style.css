@@ -110,3 +110,7 @@ hr.soften {margin: 8px 0;background: #DDD;}
 #gototop{margin-top:1px;}
 #footerMenu a{ font-size:12px; text-transform:lowercase}
 #indent {background:url(assets/img/white_leather.png) repeat 0 0; }
+.search{
+    display: inline-block;
+    margin: 1em;
+}
